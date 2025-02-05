@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2);
     };
     const createAgents = () => {
-        // have to go through pixels and if's black assign a ball
+        // have to go through pixels and if's white assign a ball
         let counter = 0;
         let agents = [];
         for (let xIndex = dotDiameter * 3; xIndex < width; xIndex += dotDiameter * 3) {
@@ -109,12 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     const directionX = agent.points.x - mousePos.x;
                     const directionY = agent.points.y - mousePos.y;
                     // normalized
-                    const magnitude = distance(agent.points.x, agent.points.y, mousePos.x, mousePos.y);
+                    const magnitude = dist;
                     const normalizedX = directionX / magnitude;
                     const normalizedY = directionY / magnitude;
                     agent.velocity = { x: normalizedX * 3, y: normalizedY * 3 };
                     // non normalized
-                    // agent.velocity = { x: directionX / 40, y: directionY / 40};
+                    // agent.velocity = { x: directionX / 0.05, y: directionY / 0.05}; //with correction
+                    // agent.velocity = { x: directionX, y: directionY };  //without
                     agent.setPoints();
                 }
                 else {
@@ -135,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let coinFlip = (Math.random() < 0.05) ? agent.changeColor(orange) : agent.changeColor(green);
             createBall(agent.points, agent.color);
         });
-        createMiddleLine();
+        // createMiddleLine();
         window.requestAnimationFrame(sketch);
     };
     //event listener for mouse
