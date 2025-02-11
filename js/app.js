@@ -110,11 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const directionY = agent.points.y - mousePos.y;
                     // normalized
                     const magnitude = dist;
-                    const normalizedX = directionX / magnitude;
-                    const normalizedY = directionY / magnitude;
-                    agent.velocity = { x: normalizedX * 3, y: normalizedY * 3 };
+                    const normalizedX = directionX / (magnitude / 3);
+                    const normalizedY = directionY / (magnitude / 3); //mitigate the normalization effects
+                    agent.velocity = { x: normalizedX, y: normalizedY };
                     // non normalized
-                    // agent.velocity = { x: directionX / 0.05, y: directionY / 0.05}; //with correction
+                    // agent.velocity = { x: directionX * 0.05, y: directionY * 0.05}; //with correction
                     // agent.velocity = { x: directionX, y: directionY };  //without
                     agent.setPoints();
                 }

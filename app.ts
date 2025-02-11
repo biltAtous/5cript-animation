@@ -1,6 +1,6 @@
 interface Vector {
     //obsiouly not fully a vector even if called so
-    //the ball interface is more of a vector since the magnitude of the vector can be defined
+    //the ball interface completes it
     x: number,
     y: number
 }
@@ -174,12 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
                     // normalized
                     const magnitude:number = dist;
-                    const normalizedX:number = directionX / magnitude;
-                    const normalizedY:number = directionY / magnitude;
-                    agent.velocity = { x: normalizedX * 3, y: normalizedY * 3 };
+                    const normalizedX:number = directionX / ( magnitude / 3 );
+                    const normalizedY:number = directionY / ( magnitude / 3 ); //mitigate the normalization effects
+                    agent.velocity = { x: normalizedX, y: normalizedY  };
                     
                     // non normalized
-                    // agent.velocity = { x: directionX / 0.05, y: directionY / 0.05}; //with correction
+                    // agent.velocity = { x: directionX * 0.05, y: directionY * 0.05}; //with correction
                     // agent.velocity = { x: directionX, y: directionY };  //without
 
 
